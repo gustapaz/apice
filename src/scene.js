@@ -4,7 +4,7 @@ import { SLAB } from './game.js';
 const palette = [0xe98b5a,0xdb795b,0xc66d69,0xaf637b,0x965c88,0x7a638f,0x716d9d,0x8c80ac,0xa68db5,0xc59cba,0xe1b2c4,0xecc7c6];
 export function createScene(host,onLost){
   const renderer=new THREE.WebGLRenderer({antialias:true,alpha:true,powerPreference:'low-power'});
-  renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+  renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFShadowMap;
   renderer.setClearColor(0xc9d5ef,0);renderer.outputColorSpace=THREE.SRGBColorSpace;
   host.appendChild(renderer.domElement);
   const scene=new THREE.Scene();scene.fog=new THREE.Fog(0xc9d5ef,25,65);

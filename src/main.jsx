@@ -51,7 +51,7 @@ function App(){
   useEffect(()=>{if(panel&&panel!=='intro')document.querySelector('.dialog button')?.focus({preventScroll:true});},[panel]);
   function keys(event){
     if(event.ctrlKey||event.metaKey||event.altKey)return;
-    if((event.key===' '||event.key==='Enter')&&!event.repeat){event.preventDefault();drop();}
+    if(event.key===' '||event.key==='Enter'){event.preventDefault();if(!event.repeat)drop();}
     if((event.key==='p'||event.key==='P'||event.key==='Escape')&&!event.repeat){event.preventDefault();pause();}
   }
   function dialogKeys(event){
@@ -66,7 +66,7 @@ function App(){
   return <div className={`app ${save.reduced?'reduced':''}`}>
     <div id="playfield" ref={stage} tabIndex={playing?0:-1} role="group" aria-label="Torre 3D. Espaço ou Enter assenta a placa. P ou Escape pausa." onKeyDown={keys} onPointerDown={event=>{if(playing){event.currentTarget.focus({preventScroll:true});drop();}}}/>
     <div className="sky-word" aria-hidden="true">ÁPICE</div><div className="horizon" aria-hidden="true"/>
-    <header inert={panel&&panel!=='intro'?true:undefined}><a className="brand" href="./">á<span>p</span>ice<i>↗</i></a><span className="brand-sub">UM ANDAR<br/>DE CADA VEZ.</span><nav aria-label="Preferências e ajuda"><button aria-pressed={!save.muted} onClick={()=>{changeSave({...save,muted:!save.muted});if(save.muted)sound();}}>{save.muted?'Som desligado':'Som ligado'}</button><button aria-pressed={save.reduced} onClick={()=>changeSave({...save,reduced:!save.reduced})}>{save.reduced?'Efeitos reduzidos':'Reduzir efeitos'}</button><button onClick={help}>Como jogar ↗</button></nav></header>
+    <header inert={panel&&panel!=='intro'?true:undefined}><a className="brand" href="./" aria-label="Ápice, início">á<span>p</span>ice<i>↗</i></a><span className="brand-sub">UM ANDAR<br/>DE CADA VEZ.</span><nav aria-label="Preferências e ajuda"><button aria-pressed={!save.muted} onClick={()=>{changeSave({...save,muted:!save.muted});if(save.muted)sound();}}>{save.muted?'Som desligado':'Som ligado'}</button><button aria-pressed={save.reduced} onClick={()=>changeSave({...save,reduced:!save.reduced})}>{save.reduced?'Efeitos reduzidos':'Reduzir efeitos'}</button><button onClick={help}>Como jogar ↗</button></nav></header>
     <main inert={panel&&panel!=='intro'?true:undefined}>
       <div className={`altitude ${panel==='intro'?'preview':''}`}><span>{panel==='intro'?'O CÉU NÃO É O LIMITE.':'ALTURA ATUAL'}</span><strong>{String(hud.floors).padStart(2,'0')}<sup>{kind==='expedition'?'/12':'/100'}</sup></strong><span>{playing?'ANDARES ASSENTADOS':'UM JOGO SOBRE ENCONTRAR SEU TEMPO.'}</span></div>
       <aside className="readings"><span className="tiny-label">SEU MELHOR · {pace==='calm'?'CALMO':'VIVO'}</span><strong>{String(save.best[pace]).padStart(4,'0')}</strong><div className="score"><span className="tiny-label">NESTA PARTIDA</span><b>{String(hud.score).padStart(4,'0')}</b></div><p>{feedback}</p><span className="axis" aria-hidden="true">↗<br/>↑<br/>↖</span></aside>

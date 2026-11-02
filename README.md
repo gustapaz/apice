@@ -4,6 +4,8 @@
 
 **[Jogar no navegador](https://gustapaz.github.io/apice/)**
 
+![Ápice publicado: torre de nove andares em 3D](docs/public-gameplay.png)
+
 ## Sua torre
 
 - **Expedição:** complete 12 andares para vencer.
